@@ -1,7 +1,3 @@
-rsync -avz --delete -e 'ssh -p 22' . 194.249.207.57:/var/www/html/moodle
-
-rsync -avz --delete -e 'ssh -p 22' C:\Bitnami\moodle-3.5\apps\moodle\moodledata 194.249.207.57:/var/www/moodledata
-
 play
 20 01 21
 

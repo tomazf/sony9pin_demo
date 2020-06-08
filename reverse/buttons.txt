@@ -1,0 +1,130 @@
+rsync -avz --delete -e 'ssh -p 22' . 194.249.207.57:/var/www/html/moodle
+
+rsync -avz --delete -e 'ssh -p 22' C:\Bitnami\moodle-3.5\apps\moodle\moodledata 194.249.207.57:/var/www/moodledata
+
+play
+20 01 21
+
+stop
+21 11 00 32
+
+rewind
+21 23 53 97
+
+fforward
+21 13 53 87
+
+slomo (VAR) (vmes je cca 31 vrednosti, 2. byte je samo + $33 za check) - potrebno vse posneti
+
+21 12 00 33		+0.00
+21 12 10 43		+0.03
+21 12 18 4B		+0.05
+21 12 21 54 	+0.10
+21 12 2A 5D		+0.20
+21 12 2B 5E 	+0.22
+21 12 2C 5F		+0.23
+21 12 2D 60		+0.25
+21 12 36 69		+0.49
+21 12 3E 71		+0.87
+21 12 40 73		+1.00
+21 12 4A 7D 	+2.05
+
+in/out
+ 30 03 1A 82 00 00 18 E7 30 02 1A C0 00 03 0F 61
+ 
+ 
+    // When receiving one of the following commands (JOG, VAR or SHUTTLE),
+    // the device will play forward or backward according to the speed data.
+    // When the command byte low nibble is 1 and only DATA-1 is used,
+    // the material speed is defined as follows:
+    // VALUE = 10^(N/32-2)
+    // N : SPEED DATA OF DATA-1 (DECIMAL)
+
+
+
+jog: - ko se ustavi je vedno stop, sicer glede na hitrost
+ 
+ 21 11 00 32 (stop)
+
+	naprej:
+	 21 11 18 4A
+	 21 11 24 56
+	 21 11 30 62
+	 21 11 40 72
+
+	nazaj:
+	 21 21 18 5A
+	 21 21 24 66
+	 21 21 30 72
+	 21 21 40 82
+
+
+list
+ 30 02 1A C0 00 03 0F 41 30 00 71 61
+
+record
+ 30 03 1A 82 00 00 18 E7 
+ 61 20 06 87 
+ 20 01 21
+
+shuttle: - ko se ustavi je vedno stop, sicer glede na hitrost
+
+ 21 11 00 32
+ 
+	naprej:
+	 21 13 00 34 	+0.00
+	 21 13 10 44 	+0.03
+	 21 13 19 4D 	+0.06
+	 21 13 23 57 	+0.12
+	 21 13 2D 61 	+0.25
+	 21 13 36 6A 	+0.49
+	 21 13 40 74 	+1.00
+	 21 13 4A 7E	+2.05
+	 21 13 53 87 	+3.9
+	 21 13 5D 91 	+8.1
+	 21 13 67 9B 	+16.5
+	 21 13 70 A4 	+32
+	 
+	nazaj:
+	 21 23 00 44 	-0.00
+	 21 23 10 54 	-0.03
+	 21 23 19 5D	-0.06	
+	 21 23 23 67 	-0.12
+	 21 23 2D 71 	-0.25
+	 21 23 36 7A 	-0.49
+	 21 23 40 84 	-1.00
+	 21 23 4A 8E	-2.05
+	 21 23 53 97 	-3.9
+	 21 23 5D A1	-8.1
+	 21 23 67 AB 	-16.5
+	 21 23 70 B4 	-32
+	
+time mode:
+ 41 36 00 77 61
+ 20 01 82 61 
+ 20 06 87 61 
+ 20 06 87 
+ 30 02 1A C0 00 05 11 
+ 41 30 00 71 
+ 
+recue:
+ 41 36 00 77 61 
+ 20 01 82 61 
+ 20 06 87 61 
+ 20 06 87 
+ 30 02 1A C0 00 03 0F 
+ 20 01 82 61 
+ 20 06 87 61 
+ 20 06 87 
+ 30 02 1A C0 00 03 0F 
+ 41 30 00 71
+
+
+in
+30 03 1A 82 00 00 18 E7 30 02 1A C0 00 03 0F 61 
+20 01 82 61 20 06 87 61 20 06 87 30 02 1A C0 00 03 0F 41 30 00 71 61 
+
+out 
+30 03 1A 82 00 00 18 E7 30 02 1A C0 00 03 0F 61 
+20 01 82 61 20 06 87 61 20 06 87 30 02 1A C0 00 03 0F 41 30 00 71 61 
+
